@@ -1,0 +1,5 @@
+torch
+numpy
+librosa
+fairseq
+omegaconf==2.1.2
