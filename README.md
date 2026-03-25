@@ -47,14 +47,16 @@ BASELINE-SSL_AASIST
 WARNING: Submit the **fake score** only. A higher value should indicate a higher probability of being fake. Do **not** submit the real score.
 
 - `run.sh` writes model outputs to `RADAR2026-dev/scores.txt` with format `<uttid> <fakescore> <realscore>`.
-- It then extracts `<fakescore>` and writes the submission file `RADAR2026-dev-scores.txt` (this is the file to submit for the dev set).
-- Example:
+- It then extracts `<fakescore>`, sorts by `<uttid>`, and writes `submissions/RADAR2026-dev/score.tsv` with header `filename<tab>score`.
+- Finally, it packages `submissions/RADAR2026-dev/submission.zip` (containing `score.tsv`) for submission.
+- Example `score.tsv` content:
 ```
-RADAR2026-DEV000001 4.594078540802002
-RADAR2026-DEV000002 3.1839194297790527
-RADAR2026-DEV000003 4.42523717880249
-RADAR2026-DEV000004 1.0504467487335205
-RADAR2026-DEV000005 4.370476722717285
+filename	score
+RADAR2026-DEV000001	4.594078540802002
+RADAR2026-DEV000002	3.1839194297790527
+RADAR2026-DEV000003	4.42523717880249
+RADAR2026-DEV000004	1.0504467487335205
+RADAR2026-DEV000005	4.370476722717285
 ...
 ```
 - In this baseline, the submitted score is the raw fake score (no post-processing).

@@ -32,6 +32,11 @@ python inference.py \
   --num_workers 2 \
   --device $DEVICE
 
-echo "[INFO] Writing sorted score file: $DATANAME-scores.txt"
-awk '{print $1" "$2}' $DATANAME/scores.txt | sort > $DATANAME-scores.txt
-echo "[INFO] Done. Please submit $DATANAME-scores.txt to the APSIPA RADAR challenge 2026"
+echo "[INFO] Writing sorted score file: submissions/$DATANAME/score.tsv"
+mkdir -p submissions/$DATANAME/
+echo -e "filename\tscore" > submissions/$DATANAME/score.tsv
+awk '{print $1"\t"$2}' $DATANAME/scores.txt | sort >> submissions/$DATANAME/score.tsv
+cd submissions/$DATANAME/
+zip submission.zip score.tsv
+cd ../../
+echo "[INFO] Done. Please submit submissions/$DATANAME/submission.zip to the APSIPA RADAR challenge 2026"
