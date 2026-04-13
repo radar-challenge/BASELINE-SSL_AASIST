@@ -1,6 +1,6 @@
 # APSIPA RADAR Challenge 2026 Baseline - SSL AASIST Anti-spoofing
 
-This repository provides a baseline inference pipeline for the APSIPA RADAR Challenge 2026.
+This repository provides a baseline inference pipeline for the APSIPA RADAR Challenge 2026. Updated version included evaluation scripts for RADAR2026-dev set.
 
 ## Model Summary
 - Architecture: Wav2Vec 2.0 SSL frontend with an AASIST classifier
@@ -28,6 +28,7 @@ BASELINE-SSL_AASIST
 │   ├── flac
 │   └── LICENSE
 ├── RADAR2026-dev.tar.gz
+├── label_RADAR2026-dev.txt
 ├── inference.py
 ├── LICENSE
 ├── model.py
@@ -41,6 +42,34 @@ BASELINE-SSL_AASIST
 - Run inference on a GPU machine:
   - `bash run.sh`
   - To run on CPU, set `DEVICE=cpu` in `run.sh`.
+
+## Evaluation
+Use `evaluate.sh` to compute metrics from model scores and ground-truth labels.
+This repository uses an approximate EER computation, so results may differ slightly from the official competition scores.
+Evaluation outputs are saved under `result_*` directories (for example, `result_RADAR2026-dev` and `result_LlamaPartialSpoof-full`), with the main report typically in `result_*/result.txt`.
+
+### RADAR2026-dev
+1. Make sure `label_RADAR2026-dev.txt` is in the repository root.
+2. Generate scores (if not already available):
+   - `bash run.sh` (this creates `RADAR2026-dev/scores.txt`)
+3. Run evaluation:
+```
+./evaluate.sh RADAR2026-dev label_RADAR2026-dev.txt
+```
+![RADAR2026-dev evaluation result](assets/score_RADAR2026-dev.png)
+
+### Optional: LlamaPartialSpoof full set
+Run this if you want to evaluate on the original LlamaPartialSpoof bonafide/full-fake subset.
+
+1. Download data and run inference:
+```
+./run_lps_full.sh
+```
+2. Evaluate generated scores:
+```
+./evaluate.sh LlamaPartialSpoof-full label_LlamaPartialSpoof-full.txt
+```
+![LlamaPartialSpoof-full evaluation result](assets/score_LlamaPartialSpoof-full.png)
 
 ## Submission Score Format
 

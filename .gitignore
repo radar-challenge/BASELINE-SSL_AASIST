@@ -1,6 +1,10 @@
 checkpoints/*.pt
 checkpoints/*.pth
 RADAR2026*
+LlamaPartialSpoof*
+downloads/
+result_*
+label_*
 
 __pycache__/
 *.py[cod]
