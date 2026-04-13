@@ -1,6 +1,7 @@
 # APSIPA RADAR Challenge 2026 Baseline - SSL AASIST Anti-spoofing
 
-This repository provides a baseline inference pipeline for the APSIPA RADAR Challenge 2026. Updated version included evaluation scripts for RADAR2026-dev set.
+This repository provides a baseline inference and evaluation pipeline for the APSIPA RADAR Challenge 2026.
+It includes scripts to run inference, generate submission-ready scores, and evaluate results on supported development sets.
 
 ## Model Summary
 - Architecture: Wav2Vec 2.0 SSL frontend with an AASIST classifier
@@ -9,9 +10,9 @@ This repository provides a baseline inference pipeline for the APSIPA RADAR Chal
 - Model size: 300M
 
 ## Introduction
-This repository contains inference code for APSIPA RADAR Challenge 2026, based on the [SSL AASIST Audio Deepfake Detection model](https://github.com/TakHemlata/SSL_Anti-spoofing) by Hemlata Tak.
+This repository contains baseline inference and evaluation code for APSIPA RADAR Challenge 2026, based on the [SSL AASIST Audio Deepfake Detection model](https://github.com/TakHemlata/SSL_Anti-spoofing) by Hemlata Tak.
 
-Training and fine-tuning instructions are not included here. If you want to adapt or re-train the model for your own submission, please refer to the original repository.
+Training and fine-tuning instructions are not included. If you want to adapt or retrain the model for your own submission, please refer to the original repository.
 
 ## Getting Started
 - Download the following checkpoints and place them in the `checkpoints` directory:
@@ -56,6 +57,10 @@ Evaluation outputs are saved under `result_*` directories (for example, `result_
 ```
 ./evaluate.sh RADAR2026-dev label_RADAR2026-dev.txt
 ```
+4. Result
+```
+eer=37.72% margin=0.04% threshold=4.1440 negative=False
+```
 ![RADAR2026-dev evaluation result](assets/score_RADAR2026-dev.png)
 
 ### Optional: LlamaPartialSpoof full set
@@ -68,6 +73,10 @@ Run this if you want to evaluate on the original LlamaPartialSpoof bonafide/full
 2. Evaluate generated scores:
 ```
 ./evaluate.sh LlamaPartialSpoof-full label_LlamaPartialSpoof-full.txt
+```
+3. Results
+```
+eer=34.72% margin=0.12% threshold=4.0480 negative=False
 ```
 ![LlamaPartialSpoof-full evaluation result](assets/score_LlamaPartialSpoof-full.png)
 
@@ -90,3 +99,6 @@ RADAR2026-DEV000005	4.370476722717285
 ```
 - In this baseline, the submitted score is the raw fake score (no post-processing).
 - If your system only outputs a real score, you can submit `-realscore` instead.
+
+## License
+This project is licensed under the MIT License. See `LICENSE` for details.
